@@ -1,0 +1,45 @@
+.page {
+  background-color: rgb(201, 245, 245);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginArea {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0px 5% 0px 5%;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(116, 144, 238);
+  border-radius: 2%;
+}
+
+.login {
+  padding: 2%;
+  height: 50%;
+  width: 30%;
+  background-color: rgb(64, 67, 77);
+  border-radius: 2%;
+}
+.labelLogin {
+  margin-top: 5%;
+}
+
+.buttonBox {
+  width: 30%;
+  margin-top: 5%;
+  background-color: rgb(64, 67, 77);
+  height: 20%;
+  color: aliceblue;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.buttonBox:active {
+  box-shadow: 0 0px rgb(167, 28, 28);
+  transform: translateY(2px);
+}
