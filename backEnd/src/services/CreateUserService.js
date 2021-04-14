@@ -1,13 +1,19 @@
-const HashProvider = require('../providers/BCryptHashProvider');
+const HashProvider = require("../providers/BCryptHashProvider");
 const UserRepository = require("../repository/userRepository");
+const AppError = require("../utils/AppError");
 
 class CreateUserService {
+  async execute({ name, email, password }) {
+    if ((name && email && password) === "") {
+      throw new AppError("Every field should be filled", 401);
+    }
 
-  async execute({ name, email, password })  {
-    const checkUserExists = await UserRepository.findOne({where: { email }})
+    const checkUserExists = await UserRepository.findOne({ where: { email } });
 
     if (checkUserExists) {
-      throw Error('Email address already used.');
+      throw new AppError(
+        "The Email address is already used, choose another and try again."
+      );
     }
 
     const hashedPassword = await HashProvider.generateHash(password);
@@ -16,10 +22,10 @@ class CreateUserService {
       name,
       email,
       password: hashedPassword,
-    });    
+    });
 
     return user;
   }
 }
 
-module.exports =  CreateUserService;
+module.exports = CreateUserService;

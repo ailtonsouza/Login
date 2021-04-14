@@ -6,7 +6,6 @@ module.exports = {
     const { user_id } = req.params;
     const { zipcode, street, password, number } = req.body;
 
-    try {
       const createAndAssociateAdresstoUserService = new CreateAndAssociateAdresstoUserService();
 
       const adress = await createAndAssociateAdresstoUserService.execute({
@@ -18,9 +17,7 @@ module.exports = {
       });
 
       return res.json(adress);
-    } catch (err) {
-      return res.status(400).json(err.message);
-    }
+  
   },
 
   async index(req, res) {

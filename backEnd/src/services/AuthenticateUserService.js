@@ -2,13 +2,14 @@ const HashProvider = require("../providers/BCryptHashProvider");
 const UserRepository = require("../repository/userRepository");
 const { sign } = require('jsonwebtoken');
 const authConfig = require('../config/auth');
+const AppError = require ('../utils/AppError');
 
 class AuthenticateUserService {
   async execute({ email, password }) {
     const user = await UserRepository.findOne({ where: { email } });
 
     if (!user) {
-      throw Error("Incorrect email/password combination");
+      throw new AppError("Incorrect email/password combination",401);
     }
 
     const passwordMatched = await HashProvider.compareHash(
@@ -17,7 +18,7 @@ class AuthenticateUserService {
     );
  
     if (!passwordMatched) {
-      throw Error("Incorrect email/password combination");
+      throw new AppError("Incorrect email/password combination",401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;

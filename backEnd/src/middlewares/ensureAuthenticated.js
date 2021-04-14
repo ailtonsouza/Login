@@ -1,5 +1,6 @@
 const { verify } = require(  'jsonwebtoken');
 const authConfig = require(  '../config/auth');
+const AppError = require ('../utils/AppError');
 
 function ensureAuthenticated(
   request,
@@ -9,8 +10,7 @@ function ensureAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    return response.status(400).json('JWR token is missing');
-    // throw Error('JWR token is missing');
+    throw new AppError('JWR token is missing', 401)
   }
 
   const [, token] = authHeader.split(' ');
@@ -25,8 +25,7 @@ function ensureAuthenticated(
 
     return next();
   } catch (err) {
-    return response.status(400).json('Invalid JWT token');
-    // throw Error('Invalid JWT token');
+    throw new AppError('Invalid JWT token', 401);
   }
 }
 

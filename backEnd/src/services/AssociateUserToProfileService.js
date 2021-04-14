@@ -1,7 +1,7 @@
 
 const ProfileRepository = require("../repository/profileRepository");
 const UserRepository = require("../repository/userRepository");
-
+const AppError = require ('../utils/AppError');
 class AssociateUserToProfileService {
 
   async execute({ name, user_id })  {
@@ -10,7 +10,7 @@ class AssociateUserToProfileService {
     const user = await UserRepository.findByPk(user_id);
 
     if (!user) {
-      throw Error("User not found" );
+      throw new AppError("User not found", 404);
     }
     
     const profile = await ProfileRepository.findOne({
@@ -18,13 +18,13 @@ class AssociateUserToProfileService {
     });
     
     if (!profile) {
-      throw Error("Profile not found");
+      throw new AppError("Profile not found", 404);
     }
     
     const user_profiles = await user.addProfile(profile)
 
     if(!user_profiles) {
-      throw Error('Already Associated');
+      throw new AppError('Already Associated', 200);
     } 
 
 

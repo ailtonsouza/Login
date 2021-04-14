@@ -1,5 +1,6 @@
 const AdressRepository = require("../repository/adressRepository");
 const UserRepository = require("../repository/userRepository");
+const AppError = require ('../utils/AppError');
 
 class CreateAndAssociateAdresstoUserService {
 
@@ -7,7 +8,7 @@ class CreateAndAssociateAdresstoUserService {
     const user = await UserRepository.findByPk(user_id);
 
     if (!user) {
-      throw Error("User not found" );
+      throw new AppError("User not found",401);
     }
    
       const adress = await AdressRepository.create({

@@ -4,37 +4,36 @@ const AuthenticateUserService = require("../services/AuthenticateUserService");
 
 module.exports = {
   async index(req, res) {
+    // const delay = new Promise((resolve) => setTimeout(resolve, 2000));
+    // await delay;
+
     const users = await UserRepository.findAll();
 
-    return res.json(users);
+    const random = users[Math.floor(Math.random() * users.length)];
+
+    return res.json(random);
   },
 
   async store(req, res) {
+    // const delay = new Promise((resolve) => setTimeout(resolve, 20000));
+    // await delay;
+
     const { name, email, password } = req.body;
 
-    try {
-      const createUserService = new CreateUserService();
+    const createUserService = new CreateUserService();
 
-      const user = await createUserService.execute({ name, email, password });
+    const user = await createUserService.execute({ name, email, password });
 
-      return res.json(user);
-    } catch (err) {
-      return res.status(400).json(err.message);
-    }
+    return res.json(user);
   },
 
   async authenticate(req, res) {
     const { email, password } = req.body;
+    console.log(req.body)
+    const authenticateUserService = new AuthenticateUserService();
 
-    try {
-      const authenticateUserService = new AuthenticateUserService();
+    const user = await authenticateUserService.execute({ email, password });
 
-      const user = await authenticateUserService.execute({ email, password });
-
-      return res.json(user);
-    } catch (err) {
-      return res.status(400).json(err.message);
-    }
+    return res.json(user);
   },
-
 };
