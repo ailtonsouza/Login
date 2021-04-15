@@ -1,62 +1,101 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
+import { Link, useHistory } from "react-router-dom";
+import getValidationErros from "../../utils/getValidationErros";
+import * as Yup from "yup";
 import api from "../../services/api";
 
-function Signin() {
-  const [name, setName] = useState("");
+function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [erros, setErros] = useState("");
 
-  async function  login(e) {
+  const history = useHistory();
+
+  async function login(e) {
     e.preventDefault();
-    const user = await api.get('/users/authenticate', {
-      name,
-      email,
-      password
-    })
 
-    console.log(user);
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required("E-mail é obrigatorio")
+          .email("Digite um e-mail válido"),
+        password: Yup.string().required("Informe o password"),
+      });
+
+      const data = {
+        email: email,
+        password: password,
+      };
+
+      await schema.validate(data, { abortEarly: false });
+      console.log(password, email);
+
+      await api.post("users/authenticate", {
+        email: email,
+        password: password,
+      });
+
+    
+      history.push('/MainPage')
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErros(err);
+        setErros(errors);
+        return;
+      }
+
+      if (err.response) {
+        console.log(err.response);
+        setErros(err.response.data);
+        return;
+      }
+    }
   }
 
   return (
     <div className={styles.page}>
       <div className={styles.login}>
         <form className={styles.loginArea}>
-
-        <label className={styles.labelLogin} for="E-mail">
-            Name
-          </label>
-          <input
-            onChange={(e) => setName(e.target.value)}
-            className={styles.loginBox}
-            id="E-mail"
-          ></input>
-
-          <label className={styles.labelLogin} for="E-mail">
-            E-mail
-          </label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.loginBox}
-            id="E-mail"
-          ></input>
-
-          <label className={styles.labelLogin} for="senha">
-            Senha
-          </label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.passwordBox}
-            id="password"
-          ></input>
+          <h2>Wellcome to Ailtenrest</h2>
+          <div className={styles.formBody}>
+            <div className={styles.input}>
+              <label className={styles.labelLogin} htmlFor="E-mail">
+                E-mail
+              </label>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                className={styles.loginBox}
+                id="E-mail"
+              ></input>
+              <p className={styles.messageError}>{erros.email}</p>
+            </div>
+            <div className={styles.input}>
+              <label className={styles.labelLogin} htmlFor="senha">
+                Password
+              </label>
+              <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                className={styles.loginBox}
+                id="password"
+              ></input>
+              <p className={styles.messageError}>{erros.password}</p>
+            </div>
+          </div>
 
           <button onClick={(e) => login(e)} className={styles.buttonBox}>
-            Create
+            Sign In
           </button>
+
+          <div className={styles.errorBox}>
+            <p>{erros.message}</p>
+          </div>
         </form>
       </div>
+      <Link to="/CreateUser">Create User</Link>
     </div>
   );
 }
 
-export default Signin;
+export default SignIn;

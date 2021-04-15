@@ -10,7 +10,7 @@
 .loginArea {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 
   height: 100%;
@@ -22,16 +22,12 @@
 .formBody {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  display: flex;
-  flex-direction: column;
   width: 90%;
-  height: 40%;
 }
 
 .login {
   padding: 2%;
-  height: 70%;
+  height: 80%;
   width: 40%;
   background-color: rgb(64, 67, 77);
   border-radius: 2%;
@@ -45,17 +41,13 @@
 }
 
 .labelLogin {
- /* // margin-top: 0.5%; */
+  margin-top: 1%;
 }
 
 .buttonBox {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: medium;
-  width: 20%;
-  background-color: rgb(48, 51, 58);
+  width: 30%;
+  margin-top: 5%;
+  background-color: rgb(64, 67, 77);
   height: 30px;
   color: aliceblue;
   border-radius: 5%;
@@ -68,7 +60,7 @@
 }
 
 .messageError {
-  font-size: small;
+  font-size: smaller;
   color: red;
 }
 
@@ -77,28 +69,3 @@
   flex-direction: column;
   height: 60px;
 }
-
-.errorBox {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-}
-
-.imgWarning {
-  margin: 1% 1% 1% 1%;
-  height: 25px;
-  width: 25px;
-}
-
-.errorMessageBox {
-  display: flex;
-  flex-direction: column;
-
-  /* justify-content: center;
-  align-items: center; */
-}
-/*------------------*/
-

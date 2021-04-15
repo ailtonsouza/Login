@@ -1,10 +1,15 @@
-import './App.css';
-import Signin from '../src/Pages/Signin'
+import React from "react";
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./routes/";
 
-function App() {
+
+function App () {
   return (
-    <Signin />
-  );
+    <BrowserRouter>
+    <Routes />
+    </BrowserRouter>
+  ) 
 }
 
 export default App;
