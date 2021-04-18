@@ -2,14 +2,16 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes/";
+import { AuthProvider } from "../src/hooks/AuthContext";
 
-
-function App () {
+function App() {
   return (
-    <BrowserRouter>
-    <Routes />
-    </BrowserRouter>
-  ) 
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
 export default App;

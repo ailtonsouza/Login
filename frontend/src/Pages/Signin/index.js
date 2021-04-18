@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./styles.module.css";
 import { Link, useHistory } from "react-router-dom";
 import getValidationErros from "../../utils/getValidationErros";
 import * as Yup from "yup";
 import api from "../../services/api";
+import { useAuth } from "../../hooks/AuthContext";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [erros, setErros] = useState("");
-
+  const { signIn } = useAuth();
   const history = useHistory();
 
   async function login(e) {
@@ -29,15 +30,15 @@ function SignIn() {
       };
 
       await schema.validate(data, { abortEarly: false });
-      console.log(password, email);
 
-      await api.post("users/authenticate", {
-        email: email,
-        password: password,
-      });
+      // await api.post("users/authenticate", {
+      //   email: email,
+      //   password: password,
+      // });
 
-    
-      history.push('/MainPage')
+      await signIn(email, password);
+
+      history.push("/MainPage");
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErros(err);
