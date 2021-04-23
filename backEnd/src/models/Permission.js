@@ -1,8 +1,16 @@
 const { Model, DataTypes } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
-class Profile extends Model {
+class Permission extends Model {
   static init(sequelize) {
+    sequelize.define('profile_permissions',{
+      id: {
+        primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
+    })
+  
     super.init(
       {
         id: {
@@ -14,24 +22,17 @@ class Profile extends Model {
       },
       {
         sequelize,
-        tableName: "profiles",
+        tableName: "permissions",
       }
     );
   }
 
   static associate(models) {
-    this.belongsToMany(models.User, {
-      foreignKey: "profile_id",
-      through: "user_profiles",
-      as: "users",
-    });
-
-    
-    this.belongsToMany(models.Permission, {
-      foreignKey: "profile_id",
+    this.belongsToMany(models.Profile, {
+      foreignKey: "permission_id",
       through: "profile_permissions",
-      as: "permissions",
+      as: "profile",
     });
   }
 }
-module.exports = Profile;
+module.exports = Permission;

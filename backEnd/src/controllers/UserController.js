@@ -4,20 +4,12 @@ const AuthenticateUserService = require("../services/AuthenticateUserService");
 
 module.exports = {
   async index(req, res) {
-    // const delay = new Promise((resolve) => setTimeout(resolve, 2000));
-    // await delay;
-
     const users = await UserRepository.findAll();
 
-    const random = users[Math.floor(Math.random() * users.length)];
-
-    return res.json(random);
+    return res.json(users);
   },
 
   async store(req, res) {
-    // const delay = new Promise((resolve) => setTimeout(resolve, 20000));
-    // await delay;
-
     const { name, email, password } = req.body;
 
     const createUserService = new CreateUserService();
@@ -29,11 +21,23 @@ module.exports = {
 
   async authenticate(req, res) {
     const { email, password } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     const authenticateUserService = new AuthenticateUserService();
 
     const user = await authenticateUserService.execute({ email, password });
 
     return res.json(user);
   },
+
+  async find_user_profiles(req, res) {
+    const { user_id } = req.params;
+    console.log(user_id)
+
+    const user = await UserRepository.findByPk(user_id, {
+      include: {association: 'profiles'}
+    });
+
+    return res.json(user);
+  },
+
 };

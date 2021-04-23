@@ -1,28 +1,26 @@
 "use strict";
-const { Model, DataTypes } = require("sequelize");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.createTable("user_profiles", {
+    return await queryInterface.createTable("profile_permissions", {
       id: {
         type: Sequelize.UUID,
         primaryKey: true,
         allowNull: false,
         unique: true,
         defaultValue: Sequelize.UUIDV4,
-
-      },
-      user_id: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: { model: "users", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
       },
       profile_id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: { model: "profiles", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      permission_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: { model: "permissions", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
@@ -38,6 +36,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("profiles");
+    await queryInterface.dropTable("user_profiles");
   },
 };
