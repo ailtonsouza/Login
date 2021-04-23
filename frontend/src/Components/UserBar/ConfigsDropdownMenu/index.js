@@ -33,16 +33,16 @@ export default function DropdownMenu() {
         <div className="menu">
           <DropdownItem
             leftIcon={<CogIcon />}
-            goToMenu="animals"
-            setActiveMenu={setActiveMenu}
-          >
-            Profiles
+             goToMenu="accesses"
+             setActiveMenu={setActiveMenu}
+          >           
+            Access
           </DropdownItem>
         </div>
       </CSSTransition>
 
-      <CSSTransition
-        in={activeMenu === "animals"}
+       <CSSTransition
+        in={activeMenu === "accesses"}
         timeout={500}
         classNames="menu-secondary"
         unmountOnExit
@@ -56,12 +56,13 @@ export default function DropdownMenu() {
           >
             <h3>Back</h3>
           </DropdownItem>
-          <DropdownItem leftIcon={<CogIcon />} to="/PersonalInformation">
-            Personal Information
+          <DropdownItem leftIcon={<CogIcon />} 
+            to="/Acesses">
+            Acesses
           </DropdownItem>
 
           <DropdownItem leftIcon={<CogIcon />} to="/">
-            Acesses
+            Perfil
           </DropdownItem>
         </div>
       </CSSTransition>
