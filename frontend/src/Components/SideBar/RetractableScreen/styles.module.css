@@ -1,0 +1,26 @@
+
+.SideBarOpen {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 125px;
+    height: 90vh;
+    width: 85%;
+    flex: 1;
+    margin-left: 14.5vw;
+    transition: 0.35s ease-in-out;
+    z-index: 1;
+  }
+  
+  .SideBarClosed {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 125px;
+    height: 90vh;
+    width: 100%;
+    flex: 1;
+    transition: 0.35s ease-in-out;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+  }

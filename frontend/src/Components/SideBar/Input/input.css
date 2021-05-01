@@ -1,0 +1,72 @@
+.InputBody {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  margin-top: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.Input {
+  height: 35px;
+  width: 90%;
+  font-size: 120%;
+  border-radius: 5px 0px 0px 5px;
+  box-sizing: border-box;
+  background-color:#ffffff;
+  outline: none;
+  border: 1px solid black;
+
+}
+
+.InputBody span {
+  position: absolute;
+  height: 100%;
+  font-size: 120%;
+  pointer-events: none;
+  color: rgb(75, 7, 5);
+  font-weight: 500;
+  margin: 5px 0 0 10px;
+}
+
+.Input:focus + span {
+  position: absolute;
+  transition: 0.2s; 
+  top: 0%;
+  font-size: 100%;
+  color: rgb(75, 7, 5);
+  font-weight: bold;
+  top: -5%;
+  left: -2%;
+}
+
+#Filled {
+  transition: 0.3s;
+  position: absolute;
+  top: -5%;
+  left: -2%;
+  font-size: 100%;
+  color: rgb(75, 7, 5);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.InputBody button {
+  height: 35px;
+  width: 15%;
+  cursor: pointer;
+  border-radius: 0px 10px 10px 0px;
+  outline: none;
+  border-left: none;
+  background-color: rgb(247, 240, 232);
+  font-size: x-large;
+}
+
+h1 {
+  font-size: larger;
+  color: black;
+}
+
+.selectorButton {
+  border: 1px solid black;
+}

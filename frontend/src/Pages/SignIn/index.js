@@ -40,6 +40,9 @@ function SignIn() {
 
       history.push("/MainPage");
     } catch (err) {
+
+      console.log('cautgh')
+
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErros(err);
         setErros(errors);
@@ -51,6 +54,8 @@ function SignIn() {
         setErros(err.response.data);
         return;
       }
+
+      setErros(err);
     }
   }
 

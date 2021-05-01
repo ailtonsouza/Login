@@ -1,0 +1,47 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(247, 240, 232);
+    margin: 5px 20px 5px 20px;
+    border: 1px solid rgb(245, 204, 204);
+    padding: 10px;
+
+}
+
+.body {
+   border: 2px solid red;
+    margin: 10px;
+}
+
+.item {
+
+    background-color: rgb(247, 240, 232);
+    width: 300px;
+}
+
+
+.SideBarOpen {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 125px;
+    height: 90vh;
+    width: 85%;
+    flex: 1;
+    margin-left: 14.5vw;
+    transition: 0.35s ease-in-out;
+    z-index: 1;
+  }
+  
+  .SideBarClosed {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 125px;
+    height: 90vh;
+    width: 100%;
+    flex: 1;
+    transition: 0.35s ease-in-out;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+  }
