@@ -9,4 +9,5 @@ permissonRoutes.use(ensureAuthenticated)
 permissonRoutes.post("/", PermissionController.store);
 permissonRoutes.get("/", PermissionController.index);
 
+
 module.exports = permissonRoutes;

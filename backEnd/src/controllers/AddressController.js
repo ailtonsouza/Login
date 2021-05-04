@@ -4,7 +4,7 @@ const CreateAndAssociateAdresstoUserService = require("../services/CreateAndAsso
 module.exports = {
   async store(req, res) {
     const { user_id } = req.params;
-    const { zipcode, street, password, number } = req.body;
+    const { zipcode, street, number } = req.body;
 
       const createAndAssociateAdresstoUserService = new CreateAndAssociateAdresstoUserService();
 
@@ -12,7 +12,6 @@ module.exports = {
         user_id,
         zipcode,
         street,
-        password,
         number,
       });
 

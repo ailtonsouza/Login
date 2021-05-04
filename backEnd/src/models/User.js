@@ -9,10 +9,7 @@ class User extends Model {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-
     })
-
-
     super.init(
       {
         id: {

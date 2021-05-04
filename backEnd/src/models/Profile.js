@@ -11,6 +11,7 @@ class Profile extends Model {
           defaultValue: DataTypes.UUIDV4,
         },
         name: DataTypes.STRING,
+        
       },
       {
         sequelize,

@@ -7,7 +7,7 @@ const adressRoutes = express.Router();
 
 adressRoutes.use(ensureAuthenticated)
 
-adressRoutes.post("/:user_id/addresses", AddressController.store);
-adressRoutes.get("/:user_id/addresses", AddressController.index);
+adressRoutes.post("/:user_id", AddressController.store);
+adressRoutes.get("/:user_id", AddressController.index);
 
 module.exports = adressRoutes;

@@ -1,6 +1,7 @@
 const UserRepository = require("../repository/userRepository");
 const CreateUserService = require("../services/CreateUserService");
 const AuthenticateUserService = require("../services/AuthenticateUserService");
+const DisassociateUserProfile = require("../services/DisassociateUserProfile");
 
 module.exports = {
   async index(req, res) {
@@ -31,13 +32,34 @@ module.exports = {
 
   async find_user_profiles(req, res) {
     const { user_id } = req.params;
-    console.log(user_id)
+  
 
     const user = await UserRepository.findByPk(user_id, {
-      include: {association: 'profiles'}
+      include: {
+        association: 'profiles',
+        attributes:["name","id"], 
+        through: { 
+          attributes: []
+        }      
+      }
     });
 
-    return res.json(user);
+    return res.json(user.profiles);
+  },
+
+  async remove_user_profiles(req, res) {
+    const { user_id } = req.params;
+    const { profile_name} = req.body;
+
+    const disassociateUserProfile = new DisassociateUserProfile();
+
+    await disassociateUserProfile.execute({user_id, profile_name});
+
+
+ 
+      return res.json();
+
+   
   },
 
 };
